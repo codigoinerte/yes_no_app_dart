@@ -18,17 +18,17 @@ class ChatProvider extends ChangeNotifier {
 
     messageList.add(newMessage);
 
-    if (text.endsWith('?')) {
-      herReply();
-    }
+      herReply(newMessage.text);
+    // if (text.endsWith('?')) {
+    // }
 
     notifyListeners();
 
     moveScrollToBottom();
   }
 
-  Future<void> herReply() async {
-    final herMessage = await getYesOrNoAnswer.getAnswer();
+  Future<void> herReply(String message) async {
+    final herMessage = await getYesOrNoAnswer.getAnswer(message);
     messageList.add(herMessage);
     notifyListeners();
 
