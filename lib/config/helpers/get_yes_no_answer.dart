@@ -9,8 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class GetYesNoAnswer {
   final _dio = Dio();
 
-  Future<Message> getAnswer(String message) async {
-
+  Future<Message> getAnswer(String message, List<Message> messages) async {
     //yes no 
     await dotenv.load(fileName: ".env");
 
@@ -23,6 +22,11 @@ class GetYesNoAnswer {
     final params = {
       "model": "gpt-3.5-turbo",
       "messages": [
+        ...messages.map((message) => {
+          "role": message.fromWho == FromWho.hers ? 'assistant' : 'user',
+          "content": message.text
+        }),
+
         {"role": "user", "content": message}
       ],
       "temperature": 0.7

@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ChatProvider();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) =>ChatProvider(),)

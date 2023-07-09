@@ -9,8 +9,12 @@ import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
+    final chatProvider = context.watch<ChatProvider>();
+
     return Scaffold(
       appBar: AppBar(
         leading: const Padding(
@@ -22,6 +26,19 @@ class ChatScreen extends StatelessWidget {
         ),
         title: const Text('Henry cavill'),
         centerTitle: false,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: GestureDetector(
+                onTap: (){
+
+                    chatProvider.clearMessages();
+                    chatProvider.guardarMensajes([]);
+                },
+                child: const Icon(Icons.refresh_outlined),
+              ),
+          )
+        ],
       ),
       body: _ChatView(),
     );
